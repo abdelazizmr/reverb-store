@@ -1,0 +1,90 @@
+body{
+    background-color: #F3FAFB;
+    font-family: Arial, Helvetica, sans-serif;
+    overflow: hidden;
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+a{
+    text-decoration: none;
+}
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap:wrap;
+    gap: 80px;
+    margin: 30px auto;
+}
+
+.form{
+    padding: 30px 60px;
+    border-radius: 20px;
+    box-shadow: -4px 5px 50px -10px #c0bac2;;
+}
+img{
+    max-width: 500px;
+}
+
+.form-check{
+    margin-top: 10px !important;
+}
+button{
+    width: 100%;
+}
+.line{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.line hr{
+    width: 40%;
+    margin-bottom: 25px;
+}
+.line p{
+    font-size: 18px;
+    color: gray;
+}
+#failure,#invalid_pass{
+    font-size: 16px !important;
+}
+footer{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 40px;
+}
+footer ul{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+footer ul li {
+    list-style-type: none;
+}
+footer ul li a{
+    font-size: 14px;
+    opacity: .6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+@media (max-width:700px) {
+    img{
+        max-width:400px
+    }
+    main{
+        gap: 20px;
+    }
+    .form{
+        max-width: 450px;
+        padding: 20px 40px;
+    }
+}
