@@ -24,7 +24,7 @@ if (isset($_POST['log'])){
 
     // going back to the main page
 
-    header('location:../welcome.php');
+    header('location:../../home/home.php');
 
 }
 

@@ -53,7 +53,7 @@ session_start();
         </section>
     </main>
 
-    <footer>
+    <footer class="mt-5">
         <ul>
             
             <li><a href=""><i class="fa-solid fa-earth-americas"></i>Language</a></li>

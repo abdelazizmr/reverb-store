@@ -71,6 +71,7 @@ class Login extends ConnectToDb{
 
             $_SESSION["USERNAME"] = $user[0]["client_username"];
             $_SESSION["ID"] = $user[0]["client_id"];
+            $_SESSION["EMAIL"] = $user[0]["client_email"];
 
             $stmt = null;
         }

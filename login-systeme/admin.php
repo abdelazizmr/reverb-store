@@ -24,7 +24,6 @@
                     <input type="password" name="password" class="form-control" id="password" required>
                 </div> 
                 <button type="submit" class="btn btn-success mt-3" name="log">Log in</button>
-                <a class="text-center mt-4" href="index.php">home page</a>
             </form>
 
         

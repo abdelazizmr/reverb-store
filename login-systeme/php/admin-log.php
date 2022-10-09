@@ -109,7 +109,7 @@ if (isset($_POST['log'])){
 
     $login = new AdminLogin($ausername,$apassword);
     $login->loginUser();
-    header('location:../welcome.php?admin=true');
+    header('location:../../home/home.php?admin=true');
     exit();
 }
 
