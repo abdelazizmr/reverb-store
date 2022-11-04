@@ -16,7 +16,7 @@ include "header.php";
                         <!-- Profile picture help block-->
                         <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
                         <!-- Profile picture upload button-->
-                        <button class="btn btn-primary" type="button">Upload new image</button>
+                        <input class="btn btn-primary" type="file">Upload new image</input>
                     </div>
                 </div>
             </div>
@@ -34,7 +34,7 @@ include "header.php";
                                     if ($_SESSION['USERNAME']){
                                         $user = $_SESSION['USERNAME'];;
 
-                                        echo "<input class='form-control' name='username' type='text' value='$user'>";
+                                        echo "<input class='form-control' name='username' type='text' value='$user' disabled>";
                                     }else{
                                         echo "<input class='form-control' name='username' type='text' value=''>";
                                     }
@@ -63,7 +63,7 @@ include "header.php";
                                 <?php
                                     if ($_SESSION['EMAIL']){
                                         $email = $_SESSION['EMAIL'];
-                                        echo "<input class='form-control' name='email' type='email' value='$email'>";
+                                        echo "<input class='form-control' name='email' type='email' value='$email' disabled>";
                                     }else{
                                         echo '<input class="form-control" name="email" type="email" placeholder="Enter your email address" value="name@example.com">';
                                     }
