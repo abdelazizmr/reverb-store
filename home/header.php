@@ -24,12 +24,12 @@ session_start();
 
 
         <nav class="navbar navbar-light bg-light" style="background-color: white !important">
-            <div class=" container-fluid">
+            <div class=" container">
                 <a href="home.php" class="navbar-brand">
                     <h2 class="text-center">REVERB</h2>
                 </a>
                 <form class="d-flex" method="post" action="home.php">
-                    <input class="form-control me-2" type="search" name="search" placeholder="Searcha product" aria-label="Search">
+                    <input class="form-control" type="search" name="search" placeholder="Searcha product" aria-label="Search">
                     <button type="submit" class="btn btn-primary"><i class="fa-sharp fa-solid fa-magnifying-glass"></i></button>
                     <?php
                     if ($_SESSION['USERNAME']) {
@@ -37,11 +37,9 @@ session_start();
                         $id = $_SESSION['ID'];
 
                         echo "<button id='btnToggle' class='btn btn-primary rounded-circle ms-2 username'>$user[0] </button>";
-                    } else {
-                        echo "<button id='btnToggle' class='btn btn-primary rounded-circle username'>?</button>";
                     }
                     ?>
-                   
+
                     <ul id="bar" class="hide">
 
                         <li><a href="update-profil.php">Edit Your Profile</a></li>
@@ -50,9 +48,9 @@ session_start();
                         <button class="btn btn-primary" type="submit" name="logout">log out</button>
                     </ul>
                 </form>
-                
+
             </div>
-                    
+
         </nav>
 
     </header>

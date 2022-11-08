@@ -14,10 +14,12 @@ a{
     color: black;
 }
 header {
-    background-color: white;
-}
-nav {
     background-color: #f6f6f6;
+    
+}
+
+nav {
+    background-color: white;
 }
 nav ul{
     display: flex;
@@ -53,8 +55,8 @@ nav ul li a:hover{
     align-items: center;
     background-color: #f6f6f6;
     position: absolute;
-    top: 60px !important;
-    right: -50px !important;
+    top: 68px;
+    right: 0px;
     padding: 20px;
     z-index: 10;
    
@@ -76,6 +78,10 @@ nav ul li a:hover{
 h3{
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
+}
+input{
+    border-radius: none !important;
+    border: none !important;
 }
 
 
