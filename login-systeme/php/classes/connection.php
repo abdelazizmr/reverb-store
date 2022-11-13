@@ -2,8 +2,6 @@
 
 class ConnectToDb{
 
-
-
     public function connectToDataBase(){
         try{
             //!you are now connection from the user => store_app  1234

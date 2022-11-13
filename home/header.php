@@ -20,49 +20,37 @@ session_start();
 
 <body style="background-color:#f6f6f6">
 
-    <header class="mb-5" style="background-color: white;">
 
 
-        <nav class="navbar navbar-light bg-light" style="background-color: white !important">
-            <div class=" container">
-                <a href="home.php" class="navbar-brand">
-                    <h2 class="text-center">REVERB</h2>
-                </a>
-                <form class="d-flex" method="post" action="home.php">
-                    <input class="form-control" type="search" name="search" placeholder="Searcha product" aria-label="Search">
-                    <button type="submit" class="btn btn-primary"><i class="fa-sharp fa-solid fa-magnifying-glass"></i></button>
-                    <?php
-                    if ($_SESSION['USERNAME']) {
-                        $user = $_SESSION['USERNAME'];
-                        $id = $_SESSION['ID'];
+    <nav class="navbar navbar-light bg-light mb-4" style="background-color: white !important">
+        <div class=" container">
+            <a href="home.php" class="navbar-brand">
+                <h2 class="text-center">REVERB</h2>
+            </a>
+            <form class="d-flex" method="post" action="home.php">
+                <input class="form-control" type="search" name="search" placeholder="Searcha product" aria-label="Search">
+                <button type="submit" class="btn btn-primary"><i class="fa-duotone fa-magnifying-glass"></i></button>
+                <?php
+                if ($_SESSION['USERNAME']) {
+                    $user = $_SESSION['USERNAME'];
+                    $id = $_SESSION['ID'];
 
-                        echo "<button id='btnToggle' class='btn btn-primary rounded-circle ms-2 username'>$user[0] </button>";
-                    }
-                    ?>
+                    echo "<button id='btnToggle' class='btn btn-primary rounded-circle ms-2 username'>$user[0] </button>";
+                }
+                ?>
 
-                    <ul id="bar" class="hide">
+                <ul id="bar" class="hide">
 
-                        <li><a href="update-profil.php">Edit Your Profile</a></li>
-                        <li><a href="">Favourite items</a></li>
-                        <li><a href="">Settings</a></li>
-                        <button class="btn btn-primary" type="submit" name="logout">log out</button>
-                    </ul>
-                </form>
+                    <li><a href="update-profil.php">Edit Your Profile</a></li>
+                    <li><a href="">Favourite items</a></li>
+                    <li><a href="">Settings</a></li>
+                    <button class="btn btn-primary" type="submit" name="logout">log out</button>
+                </ul>
+            </form>
 
-            </div>
+        </div>
 
-        </nav>
-
-    </header>
-
-
-
-
-
-
-
-
-
+    </nav>
 
 
 

@@ -13,10 +13,6 @@ a{
     text-decoration: none;
     color: black;
 }
-header {
-    background-color: #f6f6f6;
-    
-}
 
 nav {
     background-color: white;
@@ -55,7 +51,7 @@ nav ul li a:hover{
     align-items: center;
     background-color: #f6f6f6;
     position: absolute;
-    top: 68px;
+    top: 70px;
     right: 0px;
     padding: 20px;
     z-index: 10;

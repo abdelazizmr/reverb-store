@@ -1,33 +1,30 @@
 <?php
 include "header.php";
-include "../login-systeme/php/classes/connection.php"; 
-
-echo '<div class="container d-flex flex-wrap justify-content-center gap-4 mb-5">';
-
-        
+include "../login-systeme/php/classes/connection.php";
 
 
-class Products extends ConnectToDb{
+class Products extends ConnectToDb
+{
 
 
     //* display products on load
-    function displayProducts($limit){
-        try{
+    function displayProducts($limit)
+    {
+        try {
             $stmt = $this->connectToDataBase()->query("select * from products order by product_id desc limit $limit");
 
             $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
             $this->getProducts($products);
-
-            
-        }catch(Exception){
+        } catch (Exception) {
             echo "<h4 class='h4 text-center text-danger'>Sorry something wrong at this moment! try again later</h4>";
         }
     }
 
     //* search a product by name 
-    function searchProduct($product){
-        try{
+    function searchProduct($product)
+    {
+        try {
             $stmt = $this->connectToDataBase()->prepare("select * from products where title like ? ");
 
             if (!$stmt->execute(array($product))) {
@@ -40,20 +37,20 @@ class Products extends ConnectToDb{
 
             $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-            if (count($products) == 0){
+            if (count($products) == 0) {
                 echo "<h4 class='h4 text-center text-danger'>This product does not exist</h4>";
                 exit();
             }
 
             $this->getProducts($products);
-        }catch(Exception){
+        } catch (Exception) {
             echo "<h4 class='text-center text-danger'>This product does not exist</h4>";
         }
-
     }
 
     //* took an array as parameter and create products cards
-    function getProducts($arr){
+    function getProducts($arr)
+    {
         foreach ($arr as $product) {
 
             $title = $product['Title'];
@@ -79,47 +76,107 @@ class Products extends ConnectToDb{
     }
 
     //* countries on the select menu
-    function get_countries(){
+    function getCountries()
+    {
         $stmt = $this->connectToDataBase()->query("CALL get_countries()");
-        $countries = $stmt->fetchAll(PDO::FETCH_ASSOC); 
-        echo '<form method="POST" class= "d-flex container justify-content-end">
-                <select name="countries" class="my-3 p-2 me-1">';
+        $countries = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        foreach($countries as $country){
 
-        $name = $country["country"];
-            echo "<option value='$name'>$name</option>";        
+        foreach ($countries as $country) {
+            $name = $country["country"];
+            echo "<option value='$name'>$name</option>";
         }
-
-        echo '</select> <button type="submit" name="confirm" style="border:none;background-color:transparent">confirm</button>
-        </form>';
     }
 
     //* filtering products by country
-    function filter_countries($country){
-        try{
-            $stmt = $this->connectToDataBase()->prepare('select * from products where Country = ?');
+    function filter_products($min,$max,$country)
+    {
+        try {
+            $stmt = $this->connectToDataBase()->prepare('select * from products where Country = ? and Price between ? and ?');
 
-            if (!$stmt->execute(array($country))) {
-                $stmt = null;
-                header('location:home.php?error=search_invalid');
-                exit();
+            //print_r(array('min' => $min, 'max' => $max, 'country' => $country));
+
+            if ($country == 'Choose by Country'){
+                if($min == '' and $max == ''){
+                    echo "<h4 class='h4 text-center text-danger'>No products found ☹</h4>";
+                    exit();
+                }elseif ($max != '' and $min != ''){
+                    $stmt = $this->connectToDataBase()->query("select * from products where Price between '$min' and '$max' order by Price desc ");
+                }elseif ($max != '' and $min == ''){
+                    $stmt = $this->connectToDataBase()->query("select * from products where Price < '$max' order by Price desc ");
+                }elseif ($max == '' and $min != ''){
+                    $stmt = $this->connectToDataBase()->query("select * from products where Price > '$min' order by Price asc ");
+                }
+                elseif ($min >= $max) {
+                    echo "<h4 class='h4 text-center text-danger'>No products found ☹</h4>";
+                    exit();
+                }
+
+                
+            }elseif($min == '' and $max == ''){
+                $stmt = $this->connectToDataBase()->query("select * from products where Country = '$country' ");
             }
 
-            $stmt = $this->connectToDataBase()->query("select * from products where Country='$country' ");
+            elseif($min != ''){
+                $stmt = $this->connectToDataBase()->query("select * from products where Country = '$country' and Price > '$min' order by Price asc ");
+            } 
+            elseif ($max != '') {
+                $stmt = $this->connectToDataBase()->query("select * from products where Country = '$country' and Price < '$max' order by Price desc ");
+            }
+
+            else{
+                
+                $stmt = $this->connectToDataBase()->query("select * from products where Country = '$country' and Price between '$min' and '$max' ");
+            }
+
+           
 
             $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+            if (count($products) == 0){
+                echo "<h4 class='h4 text-center text-danger'>No products found ☹</h4>";
+                exit();
+            }
+
             $this->getProducts($products);
-        
-        }catch (Exception) {
+
+        } catch (Exception) {
             echo "<h4 class='h4 text-center text-danger'>Sorry something wrong at this moment! try again later</h4>";
         }
-        
     }
-        
-        
 }
+
+
+
+echo '<section class="filter-products mb-3">
+        <form method="POST" class="d-flex container justify-content-center gap-3">
+            <div class="input-group">
+                <span class="input-group-text">$</span>
+                <input type="number" min="0" class="form-control" placeholder="min price" name="min-price">
+            </div>
+    
+            <div class="input-group">
+                <span class="input-group-text">$</span>
+                <input type="number" min="0" class="form-control" placeholder="max price" name="max-price">
+            </div>
+            <select name="countries" class="form-select me-1">
+                <option selected>Choose by Country</option>
+                ';
+        //? getting the countries through the getCountries method from products class
+        $country = new Products();
+        $country->getCountries();
+    
+echo '</select>
+            <button type="submit" class="btn btn-primary" name="filter">Filter</button>
+        </form>;
+    </section>';
+
+echo '<div class="container d-flex flex-wrap justify-content-center gap-4 mb-5">';
+
+        
+
+
+
 
 
 //* create a products object and excute the methods respectively
@@ -128,15 +185,22 @@ function excute(){
 
     if (isset($_POST['search'])) {
         $input = $_POST['search'];
+        if ($input == ''){
+            $products->displayProducts(45);
+            exit();
+        }
         $products->searchProduct($input);
         exit();
     }
 
-    $products->get_countries();
+    //$products->getCountries();
 
+    if (isset($_POST['filter'])) {
+        $minPrice = $_POST['min-price'];
+        $maxPrice = $_POST['max-price'];
+        $countries = $_POST['countries'];
 
-    if (isset($_POST['confirm'])) {
-        $products->filter_countries($_POST['countries']);
+        $products->filter_products($minPrice,$maxPrice,$countries);
         exit();
     }
 
