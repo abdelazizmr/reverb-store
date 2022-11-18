@@ -26,9 +26,11 @@ CREATE TABLE `orders` (
   `order_id` int NOT NULL AUTO_INCREMENT,
   `product_id` int NOT NULL,
   `client_id` int NOT NULL,
-  `order_status` varchar(20) NOT NULL,
-  `order_date` datetime DEFAULT NULL,
-  PRIMARY KEY (`order_id`)
+  `order_date` date NOT NULL,
+  `quantity` int not NULL,
+  PRIMARY KEY (`order_id`),
+  foreign key (product_id) references products(product_id),
+  foreign key (client_id) references clients(client_id) 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

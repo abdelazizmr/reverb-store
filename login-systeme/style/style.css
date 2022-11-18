@@ -1,7 +1,7 @@
 body{
     background-color: #F3FAFB;
     font-family: Arial, Helvetica, sans-serif;
-    overflow: hidden;
+ 
 }
 *{
     margin: 0;
@@ -64,6 +64,7 @@ footer ul{
     justify-content: center;
     align-items: center;
     gap: 20px;
+    flex-wrap: wrap;
 }
 footer ul li {
     list-style-type: none;

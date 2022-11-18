@@ -79,9 +79,13 @@ input{
     border-radius: none !important;
     border: none !important;
 }
+button{
+    border: none;
+    outline: none;
+    background-color: transparent !important;
+}
 
-
-
+@media (max-width: 767.98px) { .border-sm-start-none { border-left: none !important; } }
 
 
 

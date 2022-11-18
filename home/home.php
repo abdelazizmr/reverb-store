@@ -52,7 +52,7 @@ class Products extends ConnectToDb
     function getProducts($arr)
     {
         foreach ($arr as $product) {
-
+            $id = $product['product_id'];
             $title = $product['Title'];
             $image = $product['Image'];
             $price = $product['Price'];
@@ -62,6 +62,7 @@ class Products extends ConnectToDb
 
             echo '
                 <div class="card shadow bg-body rounded border-right-0" style="width: 18rem;">
+                    <a href="product_detail.php?id='.$id.'">
                     <img src="' . $image . '" class="card-img-top" alt="product-image">
                     <div class="card-body">
                         <h6 class="card-text text-primary mb-3">' . $title . '</h6>
@@ -71,6 +72,7 @@ class Products extends ConnectToDb
                         <span class="card-text text-primary"><i class="fa-solid fa-angle-right"></i>' . $country . '</span>
                         </div>
                     </div>
+                    </a>
                 </div>';
         }
     }
@@ -89,8 +91,7 @@ class Products extends ConnectToDb
     }
 
     //* filtering products by country
-    function filter_products($min,$max,$country)
-    {
+    function filter_products($min,$max,$country){
         try {
             $stmt = $this->connectToDataBase()->prepare('select * from products where Country = ? and Price between ? and ?');
 
@@ -144,6 +145,7 @@ class Products extends ConnectToDb
             echo "<h4 class='h4 text-center text-danger'>Sorry something wrong at this moment! try again later</h4>";
         }
     }
+
 }
 
 
