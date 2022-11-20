@@ -30,7 +30,7 @@ CREATE TABLE `orders` (
   `quantity` int not NULL,
   PRIMARY KEY (`order_id`),
   foreign key (product_id) references products(product_id),
-  foreign key (client_id) references clients(client_id) 
+  foreign key (client_id) references clients(client_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

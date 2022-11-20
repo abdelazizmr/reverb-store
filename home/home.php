@@ -69,7 +69,7 @@ class Products extends ConnectToDb
                         <p class="card-text"><strong>' . $price . '$</strong></p>
                         <div class="d-flex justify-content-between">
                         <span class="card-text">' . $condition . '</span>
-                        <span class="card-text text-primary"><i class="fa-solid fa-angle-right"></i>' . $country . '</span>
+                        <span class="card-text text-primary"><i class="bi bi-caret-right-fill"></i>' . $country . '</span>
                         </div>
                     </div>
                     </a>

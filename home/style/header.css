@@ -16,6 +16,8 @@ a{
 
 nav {
     background-color: white;
+    position: sticky !important;
+    top: 0 !important;
 }
 nav ul{
     display: flex;
