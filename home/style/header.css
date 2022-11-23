@@ -18,6 +18,7 @@ nav {
     background-color: white;
     position: sticky !important;
     top: 0 !important;
+    z-index: 100;
 }
 nav ul{
     display: flex;
