@@ -41,3 +41,12 @@ body {
 .qty i {
   font-size: 11px;
 }
+.remove{
+  order: none;
+  outline: none;
+  background-color: transparent;
+  
+}
+.remove i {
+  font-size: 20px;
+}

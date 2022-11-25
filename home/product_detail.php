@@ -81,13 +81,9 @@ include "../login-systeme/php/classes/connection.php";
                         <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium at dolorem quidem modi. Nam sequi consequatur obcaecati excepturi alias magni, accusamus eius blanditiis delectus ipsam minima ea iste laborum vero?</p>
                         <div class="d-flex">
                             <input class="form-control text-center me-3" min="1" type="num" value="1" style="max-width: 3rem ; background-color:#eee" name="quantity" />
-                            <button class="btn btn-outline-dark flex-shrink-0" type="submit" name="add">
+                            <button class="btn flex-shrink-0" type="submit" name="add">
                                 <i class="bi-cart-fill me-1"></i>
                                 Add to cart
-                            </button>
-                            <button class="btn btn-primary ms-2" type="button">
-                                <i class="bi-cart-fill me-1"></i>
-                                Buy now
                             </button>
                         </div>
                     </div>

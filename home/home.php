@@ -169,7 +169,7 @@ echo '<section class="filter-products mb-3">
         $country->getCountries();
     
 echo '</select>
-            <button type="submit" class="btn btn-primary" name="filter">Filter</button>
+            <button type="submit" class="btn outline-dark" name="filter">Filter</button>
         </form>;
     </section>';
 

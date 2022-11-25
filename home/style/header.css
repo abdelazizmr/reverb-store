@@ -34,7 +34,7 @@ nav ul li a:hover{
     color: lightblue;
 }
 .username {
-    color: white;
+    color: black !important;
     text-transform: uppercase;
     font-weight: bold;
 }
@@ -67,7 +67,6 @@ nav ul li a:hover{
 }
 #bar li a:hover{
     background-color: lightblue;
-    border-bottom: 2px solid lightblue;
     color: black;
 }
 

@@ -35,13 +35,13 @@ session_start();
             </a>
             <form class="d-flex" method="post" action="home.php">
                 <input class="form-control" type="search" name="search" placeholder="Searcha product" aria-label="Search">
-                <button type="submit" class="btn btn-primary"><i class="bi bi-search"></i></button>
+                <button type="submit" class="btn"><i class="bi bi-search"></i></button>
                 <?php
                 if ($_SESSION['USERNAME']) {
                     $user = $_SESSION['USERNAME'];
                     $id = $_SESSION['ID'];
 
-                    echo "<button id='btnToggle' class='btn btn-primary rounded-circle ms-2 username'>$user[0] </button>";
+                    echo "<button id='btnToggle' class='btn rounded-circle ms-2 username text-dark'>$user[0] </button>";
                 }
                 ?>
 
@@ -50,7 +50,7 @@ session_start();
                     <li><a href="./update-profil.php">Edit Your Profile</a></li>
                     <li><a href="./orders.php">Orders</a></li>
                     <li><a href="">Settings</a></li>
-                    <button class="btn btn-primary" type="submit" name="logout">log out</button>
+                    <button class="btn text-danger" type="submit" name="logout">log out</button>
                 </ul>
             </form>
 
