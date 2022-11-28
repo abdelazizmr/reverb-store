@@ -52,9 +52,9 @@ nav ul li a:hover{
     gap: 20px;
     justify-content: center;
     align-items: center;
-    background-color: #f6f6f6;
+    background-color: #e6e6e6;
     position: absolute;
-    top: 70px;
+    top: 72px;
     right: 0px;
     padding: 20px;
     z-index: 10;

@@ -24,11 +24,6 @@ ob_start();
     class Orders extends ConnectToDb
     {
 
-        private $order_id;
-        function __construct($order_id = -1)
-        {
-            $this->order_id = $order_id;
-        } 
         // returns an array with orders to this user
         function get_orders($client_id)
         {
