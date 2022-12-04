@@ -16,7 +16,7 @@ session_start();
     <link rel="stylesheet" href="style/header.css">
     <!-- fontawesome -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/fontawesome.min.css" integrity="sha384-z4tVnCr80ZcL0iufVdGQSUzNvJsKjEtqYZjiQrrYKlpGow+btDHDfQWkFjoaz/Zr" crossorigin="anonymous">
-    
+
 
     <!-- bts icons -->
 
@@ -37,7 +37,10 @@ session_start();
                 <input class="form-control" type="search" name="search" placeholder="Searcha product" aria-label="Search">
                 <button type="submit" class="btn"><i class="bi bi-search"></i></button>
                 <?php
-                if ($_SESSION['USERNAME']) {
+                if (isset($_SESSION['IMAGE'])) {
+                    $img = $_SESSION['IMAGE'] ? $_SESSION['IMAGE'] : '';
+                    echo '<img id="btnToggle" src="./imagesUpload/' . $img . '" class="rounded-circle ms-2 username-pdp" />';
+                } else if (isset($_SESSION['USERNAME'])) {
                     $user = $_SESSION['USERNAME'];
                     $id = $_SESSION['ID'];
 

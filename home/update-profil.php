@@ -26,12 +26,51 @@ class UpdateProfile extends ConnectToDb
 
         //print_r(array($_SESSION['NAME'], $_SESSION['PHONE'], $_SESSION['ADRESS']));
     }
+
+    function deleteProfilePicture($profile_id, $filename)
+    {
+
+        $stmt = $this->connectToDataBase()->query("delete from profile_pictures where profile_id = $profile_id ");
+    }
+
+
+    function insertProfileImage($client_id, $filename)
+    {
+
+
+        $stmt = $this->connectToDataBase()->query("INSERT INTO profile_pictures (client_id,src) VALUES 
+            ($client_id,'$filename') ");
+    }
+
+    function getProfileImage($client_id)
+    {
+
+        $stmt = $this->connectToDataBase()->query("select src from profile_pictures where client_id = $client_id");
+        $row = $stmt->fetch();
+        if ($row == false) {
+            return null;
+        }
+        return $row['src'];
+    }
+
+    function getProfileId($client_id)
+    {
+        $stmt = $this->connectToDataBase()->query("select profile_id from profile_pictures where client_id = $client_id");
+        $row = $stmt->fetch();
+        return $row['profile_id'];
+    }
 }
 
 $client_id = $_SESSION['ID'];
 $update = new UpdateProfile();
 
 $update->get_infos($client_id);
+$src = $update->getProfileImage($client_id);
+
+if ($src == null) {
+    $src = "default.jpg";
+}
+
 
 if (isset($_POST['save'])) {
 
@@ -40,10 +79,55 @@ if (isset($_POST['save'])) {
     $adress = $_POST['adress'];
 
     //print_r(array($client_id,$name,$phone,$adress));
-
+    //! updated profil infos
     $update->update_info($client_id, $name, $phone, $adress);
 
-    header('location:update-profil.php?infos_changed_succefully');
+
+    header('location:update-profil.php?infos_changed_succesffully');
+}
+
+if (isset($_POST['upload'])) {
+    $filename = $_FILES['uploadfile']['name'];
+    $filetmpname = $_FILES['uploadfile']['tmp_name'];
+    //folder where images will be uploaded
+    $folder = './imagesUpload/';
+    //function for saving the uploaded images in a specific folder
+    move_uploaded_file($filetmpname, $folder . $filename);
+    //!inserting image details (ie image name) in the database
+
+
+    $result = $update->getProfileImage($client_id);
+
+    if ($result === null) {
+       $update->insertProfileImage($client_id, $filename);
+       header('location:update-profil.php?profile_image_inserted_succefully');
+        exit();
+    }
+
+    if (empty($filename)){
+        echo "<span class='text-center text-danger>You must choose a picture</span>'";
+        exit();
+    }
+
+    $profile_id  = $update->getProfileId($client_id);
+    $update->deleteProfilePicture($profile_id, $filename);
+    $update->insertProfileImage($client_id, $filename);
+    $_SESSION['IMAGE'] = $filename;
+    header('location:update-profil.php?profile_picture_updated_succefully');
+}
+
+if (isset($_POST['remove'])) {
+    if ($src == "default.jpg"){
+        header('location:update-profil.php');
+        die();
+    }
+    $filename = $_FILES['uploadfile']['name'];
+    $profile_id  = $update->getProfileId($client_id);
+    $update->deleteProfilePicture($profile_id, $filename);
+    unset($_SESSION['IMAGE']);
+    $src ="default.jpg";
+    header('location:update-profil.php?profile_picture_deleted_succefully');
+
 }
 
 ob_end_flush();
@@ -56,16 +140,18 @@ ob_end_flush();
     <div class="row">
         <div class="col-xl-4">
             <!-- Profile picture card-->
-            <div class="card mb-4 mb-xl-0">
+            <form class="card mb-4 mb-xl-0" method="post" enctype="multipart/form-data">
                 <div class="card-header">Profile Picture</div>
-                <div class="card-body text-center">
+                <div class="card-body text-center align-items-center">
                     <!-- Profile picture image-->
-                    <img class="img-account-profile rounded-circle mb-2 w-100" src="https://st4.depositphotos.com/11634452/21365/v/600/depositphotos_213659488-stock-illustration-picture-profile-icon-human-people.jpg" alt="">
+                    <img class="img-account-profile rounded-circle mb-2 w-100 h-100" src="./imagesUpload/<?php echo $src; ?>" alt="">
                     <!-- Profile picture help block-->
                     <!-- Profile picture upload button-->
-                    <input class="btn" type="file">
+                    <input type="file" name="uploadfile" class="my-2 wrap ms-5 mx-auto" accept="image/*" />
+                    <button class="btn mt-2 mx-auto text-info" name="upload">Upload</button>
+                    <button class="btn ms-2 mt-2 mx-auto text-danger" name="remove">Remove</button>
                 </div>
-            </div>
+            </form>
         </div>
 
         <div class="col-xl-8">
@@ -129,7 +215,9 @@ ob_end_flush();
                         </div>
                         <!-- Form update pwd-->
                         <!-- Save changes button-->
-                        <button class="btn mt-3 mx-auto bg-info" type="submit" name="save">Save changes</button>
+                        <button class="btn mt-3 mx-auto text-light bg-success" type="submit" name="save">
+                            Save changes
+                        </button>
             </form>
         </div>
     </div>

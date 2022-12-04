@@ -38,6 +38,14 @@ nav ul li a:hover{
     text-transform: uppercase;
     font-weight: bold;
 }
+/*  for pdp */
+.username-pdp{
+    width: 30px  !important;
+    height: 30px !important;
+    border-radius: 50% !important;
+    border: 1px solid green !important;
+    cursor: pointer !important;
+}
 .navbar-form {
     display: flex;
     justify-content: center;
@@ -86,8 +94,19 @@ button{
     outline: none;
     background-color: transparent !important;
 }
+.img-account-profile{
+    width: 200px !important;
+    height: 200px !important;
+    border-radius: 50% !important;
+    object-fit: cover !important;
+}
 
-@media (max-width: 767.98px) { .border-sm-start-none { border-left: none !important; } }
+@media (max-width: 767.98px) { 
+    .border-sm-start-none { border-left: none !important; }
+    #bar{
+        top: 100px;
+    }
+ }
 
 
 
