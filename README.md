@@ -1,3 +1,3 @@
-# e-commerce-store
+# reverb-ecommerce-store
 
-made with php and mysql
+**made with php and mysql**
