@@ -1,4 +1,5 @@
 *.csv
+.gitignore
 bootstrap-5.1.3-dist
 e_commerce_store_users.sql
 imagesUpload
